@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Experience | Kushal Khadka</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. GLOBAL VARIABLES & RESET
+           ========================================= */
+        :root {
+            --accent-blue: #00d2d3; /* Cyan */
+            --nav-bg: #1a1a2e;
+            --text-dark: #334155;
+            --bg-grey: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-grey); color: var(--text-dark); overflow-x: hidden; }
+
+        /* =========================================
+           2. NAVBAR (Universal: Desktop & Mobile)
+           ========================================= */
+        .navbar {
+            background-color: var(--nav-bg);
+            height: 80px; width: 100%; position: fixed; top: 0; left: 0;
+            z-index: 2000; display: flex; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            width: 90%; margin: 0 auto; display: flex; 
+            justify-content: space-between; align-items: center;
+        }
+
+        .logo { 
+            color: white !important; font-size: 1.5rem; font-weight: 800; 
+            letter-spacing: 1px; text-decoration: none !important; cursor: pointer;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 25px; list-style: none; }
+        
+        .nav-links a {
+            color: #ccc; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+
+        .nav-links a:hover, .nav-links a.active-nav { 
+            color: var(--accent-blue); transform: translateY(-3px); 
+        }
+
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* DROPDOWN */
+        .nav-item.dropdown { position: relative; display: inline-block; }
+
+        .dropdown-content {
+            display: none; position: absolute; background-color: #000000;
+            min-width: 260px; top: 50px; left: 50%; transform: translateX(-50%);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); z-index: 2001;
+            border-radius: 8px; border: 1px solid #333;
+        }
+
+        .dropdown-content a {
+            color: white; padding: 15px 0; text-decoration: none; display: block;
+            width: 100%; font-size: 0.9rem; text-align: center; border-bottom: 1px solid #222;
+        }
+
+        .dropdown-content a:hover { background-color: #222; color: var(--accent-blue); }
+        .show { display: block !important; }
+
+        /* =========================================
+           3. CINEMATIC SCROLL & TITLES
+           ========================================= */
+        .spacer-top { height: 40vh; width: 100%; }
+
+        .sticky-title {
+            position: sticky; top: 80px; z-index: 900; text-align: center;
+            background-color: var(--bg-grey); padding: 20px 0; width: 100%;
+        }
+        
+        .page-title { font-size: 2.5rem; color: #000; font-weight: 800; margin-bottom: 5px; }
+        .page-subtitle { color: #333; font-weight: 600; font-size: 1.1rem; }
+
+        .spacer-bottom { height: 50vh; }
+
+        /* =========================================
+           4. EXPERIENCE CONTENT (Accordion)
+           ========================================= */
+        .container {
+            max-width: 900px; margin: 0 auto 50px; padding: 0 20px; position: relative; z-index: 1;
+        }
+
+        .accordion {
+            background-color: #fff; color: #1e293b; cursor: pointer; padding: 22px; width: 100%;
+            border: none; text-align: left; outline: none; font-size: 1.15rem; font-weight: 600;
+            transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
+            border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+        }
+        .accordion:hover { background-color: #f1f5f9; }
+        .accordion.active { background-color: #1a1a2e; color: var(--accent-blue); border-color: #1a1a2e; }
+        .accordion.active i { transform: rotate(180deg); }
+        .accordion i { transition: transform 0.3s ease; }
+        
+        .panel {
+            padding: 0 10px; background-color: transparent; max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out; margin-bottom: 0;
+        }
+
+        /* Inner Cards */
+        .exp-item {
+            background: white; padding: 25px; border-radius: 12px; margin: 0 0 20px 0;
+            display: flex; align-items: flex-start; gap: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #eee;
+        }
+        
+        .exp-logo-box {
+            width: 60px; height: 60px; flex-shrink: 0;
+            background: #fff; border-radius: 50%; border: 1px solid #e2e8f0;
+            display: flex; justify-content: center; align-items: center; padding: 5px;
+        }
+        .exp-logo-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+        .exp-logo-box i { font-size: 1.5rem; color: #334155; }
+        
+        .exp-content { flex: 1; }
+        .role { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 3px; }
+        .company { font-size: 0.95rem; color: var(--accent-blue); font-weight: 600; margin-bottom: 5px; }
+        .date { font-size: 0.8rem; color: #94a3b8; font-weight: 500; margin-bottom: 12px; display: block; }
+        .description { font-size: 0.95rem; color: #475569; line-height: 1.6; margin-bottom: 15px; }
+
+        .btn-cert {
+            padding: 8px 18px; background-color: #f8fafc; color: #334155; border: 1px solid #cbd5e1;
+            border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-cert:hover { background-color: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+        .empty-state {
+            text-align: center; padding: 40px; color: #94a3b8; font-style: italic;
+            border: 2px dashed #e2e8f0; border-radius: 12px; margin-bottom: 20px; background: #fff;
+        }
+
+        /* --- UPDATED MODAL FOR PDF VIEWING --- */
+        .modal {
+            display: none; position: fixed; z-index: 3000; 
+            padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; 
+            overflow: hidden; background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-container {
+            position: relative;
+            width: 80%;
+            height: 85vh; /* Takes up 85% of screen height */
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            animation: zoom 0.5s;
+        }
+
+        /* iframe styling to ensure scroll inside */
+        .pdf-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+        
+        .close-modal {
+            position: absolute; top: -40px; right: 0;
+            color: #f1f1f1; font-size: 35px; font-weight: bold; 
+            transition: 0.3s; cursor: pointer; z-index: 3001;
+        }
+        .close-modal:hover { color: var(--accent-blue); }
+
+        .main-footer { text-align: center; padding: 30px 0; border-top: 1px solid #e2e8f0; margin-top: 80px; background: #fff; }
+        .copyright { color: #777; font-size: 0.9rem; }
+
+        /* =========================================
+           5. MOBILE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links {
+                position: fixed; top: 80px; left: 0; width: 100%;
+                background-color: var(--nav-bg);
+                flex-direction: column; align-items: center; gap: 0;
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                display: flex;
+            }
+            .nav-links.active { max-height: 450px; padding-bottom: 20px; }
+            .nav-links a { width: 100%; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+            .dropdown-content { position: static; width: 100%; transform: none; left: auto; background-color: #0b0f19; border: none; }
+            .dropdown-content a { text-align: center; }
+
+            .spacer-top { height: 35vh; }
+            .page-title { font-size: 2rem; }
+            .sticky-title { padding: 15px; }
+
+            .exp-item { flex-direction: column; }
+            .exp-logo-box { margin-bottom: 10px; }
+            
+            /* Mobile Modal Adjustments */
+            .modal-container { width: 95%; height: 80vh; margin-top: 20px; }
+            .close-modal { top: -40px; right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html#dashboard" class="logo">KK.</a>
+            <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#dashboard"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="experience.html" class="active-nav"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="projects.html"><i class="fas fa-laptop-code"></i> Projects</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown(event)">
+                        <i class="fas fa-newspaper"></i> Blogs <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="academic_blogs.html">Academic & Technical Blogs</a>
+                        <a href="general_blogs.html">General Blogs</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="spacer-top"></div>
+
+    <div class="sticky-title">
+        <h1 class="page-title">My Experience</h1>
+        <p class="page-subtitle">Professional, Technical & Leadership Journey</p>
+    </div>
+
+    <div class="spacer-bottom"></div>
+
+    <div class="container">
+
+        <button class="accordion">
+            <span><i class="fas fa-briefcase" style="margin-right:10px;"></i> Professional Experience</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="panel">
+            <div class="empty-state">
+                <i class="fas fa-hourglass-start" style="font-size: 2rem; margin-bottom: 10px; display:block;"></i>
+                <p>Not yet. Open to Internship & Job Opportunities!</p>
+            </div>
+        </div>
+
+        <button class="accordion">
+            <span><i class="fas fa-laptop-code" style="margin-right:10px;"></i> Academic & Technical Experience</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="panel">
+            <div class="exp-item">
+                <div class="exp-logo-box">
+                    <i class="fas fa-drafting-compass"></i>
+                </div>
+                <div class="exp-content">
+                    <h3 class="role">Coordinator - AutoCAD Workshop</h3>
+                    <h4 class="company">FSU x PDSC </h4>
+                    <span class="date">2024</span>
+                    <p class="description">
+                        Organized and coordinated a comprehensive technical workshop on AutoCAD for engineering students. 
+                        Managed logistics and guided participants through design basics.
+                    </p>
+                    <button class="btn-cert" onclick="openCert('assets/certificates/Autocad.pdf')">
+                        <i class="fas fa-file-pdf"></i> View Certificate
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">
+            <span><i class="fas fa-hands-helping" style="margin-right:10px;"></i> Leadership & Volunteering</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="panel">
+            <div class="exp-item">
+                <div class="exp-logo-box">
+                    <img src="assets/experience/fsu.png" alt="FSU" onerror="this.src='https://via.placeholder.com/70?text=FSU'">
+                </div>
+                <div class="exp-content">
+                    <h3 class="role">Member of Free Students Union (FSU)</h3>
+                    <h4 class="company">Pulchowk Campus</h4>
+                    <span class="date">2023 - 2025</span>
+                    <p class="description">
+                        Actively representing student interests, organizing technical workshops, sports events, 
+                        and bridging the communication gap between administration and students.
+                    </p>
+                    <button class="btn-cert" onclick="openCert('assets/certificates/Fsu.pdf')">
+                        <i class="fas fa-file-pdf"></i> View Certificate
+                    </button>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-logo-box">
+                    <img src="assets/experience/scouts.png" alt="Scout" onerror="this.src='https://via.placeholder.com/70?text=Scout'">
+                </div>
+                <div class="exp-content">
+                    <h3 class="role">Member / Volunteer</h3>
+                    <h4 class="company">Nepal Scouts (Schooling Level)</h4>
+                    <span class="date">2018 - 2020</span>
+                    <p class="description">
+                        Participated in community service initiatives, disaster relief training, and leadership camps 
+                        during school years. Developed strong discipline and teamwork skills.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="certModal" class="modal">
+        <div class="modal-container">
+            <span class="close-modal" onclick="closeCert()">&times;</span>
+            <iframe id="certFrame" class="pdf-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2026 Kushal Khadka. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- MOBILE MENU ---
+        function toggleMobileMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+        // --- DROPDOWN ---
+        function toggleDropdown(event) {
+            if(event) event.stopPropagation();
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // --- GLOBAL CLOSE ---
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn *')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) dropdowns[i].classList.remove('show');
+                }
+            }
+            if (!event.target.closest('.navbar')) {
+                var nav = document.getElementById("navLinks");
+                if (nav) nav.classList.remove("active");
+            }
+            var modal = document.getElementById("certModal");
+            if (event.target == modal) {
+                closeCert();
+            }
+        }
+
+        // --- ACCORDION LOGIC ---
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                if (this.classList.contains("active")) {
+                    this.classList.remove("active");
+                    this.nextElementSibling.style.maxHeight = null;
+                    return; 
+                }
+                var allPanels = document.getElementsByClassName("panel");
+                var allAcc = document.getElementsByClassName("accordion");
+                for (var j = 0; j < allPanels.length; j++) {
+                    allPanels[j].style.maxHeight = null;
+                    allAcc[j].classList.remove("active");
+                }
+                this.classList.add("active");
+                var panel = this.nextElementSibling;
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            });
+        }
+
+        // --- PDF CERTIFICATE MODAL LOGIC ---
+        function openCert(pdfPath) {
+            var modal = document.getElementById("certModal");
+            var frame = document.getElementById("certFrame");
+            
+            // #toolbar=0 hides print/download buttons (in Chrome/Edge)
+            // #view=FitH fits the PDF width to the modal
+            frame.src = pdfPath + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH";
+            
+            modal.style.display = "block";
+        }
+
+        function closeCert() {
+            var modal = document.getElementById("certModal");
+            var frame = document.getElementById("certFrame");
+            modal.style.display = "none";
+            frame.src = ""; // Clear source to stop playing/loading
+        }
+    </script>
+</body>
+</html>

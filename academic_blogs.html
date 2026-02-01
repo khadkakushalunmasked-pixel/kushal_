@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Academic Blogs | Kushal Khadka</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. GLOBAL VARIABLES & RESET
+           ========================================= */
+        :root {
+            --accent-blue: #00bfa6; /* Cyan Highlight */
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-grey: #f8fafc;
+            --nav-bg: #111827;
+            --white: #ffffff;
+            --card-border: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-grey);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        /* =========================================
+           2. NAVBAR (Universal: Desktop & Mobile)
+           ========================================= */
+        .navbar {
+            background-color: var(--nav-bg);
+            height: 70px;
+            width: 100%;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            width: 96%;
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        /* LOGO: kk. (Always White) */
+        .logo { 
+            color: white !important; 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            margin-left: 10px;
+            text-decoration: none !important;
+        }
+
+        /* NAV LINKS CONTAINER */
+        .nav-links { 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+            margin-right: 10px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover { 
+            color: var(--accent-blue); 
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active-page {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* HAMBURGER ICON (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        /* --- DROPDOWN --- */
+        .nav-item.dropdown { position: relative; display: inline-block; }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #000000;
+            min-width: 260px;
+            top: 50px; 
+            right: 0; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 2001;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            text-align: center; /* Centered Text */
+            border-bottom: 1px solid #222;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #1f2937;
+            color: var(--accent-blue);
+        }
+
+        .show { display: block !important; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* =========================================
+           3. CINEMATIC SCROLL & TITLES
+           ========================================= */
+        /* Desktop Spacer: Push title down moderately */
+        .spacer-top { height: 35vh; width: 100%; }
+
+        .sticky-title {
+            position: sticky;
+            top: 70px; 
+            z-index: 100;
+            text-align: center;
+            background-color: var(--bg-grey);
+            padding: 20px 15px; /* Added side padding */
+            width: 100%;
+        }
+
+        .page-title { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: var(--text-dark); 
+            margin-bottom: 10px;
+            line-height: 1.2; 
+        }
+        
+        .page-subtitle { 
+            color: var(--text-light); 
+            font-weight: 500; 
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto; /* Centers the subtitle block */
+        }
+
+        .spacer-bottom { height: 60vh; }
+
+        /* =========================================
+           4. CARDS
+           ========================================= */
+        .container-narrow { max-width: 800px; margin: 0 auto 50px; padding: 0 20px; }
+
+        .notion-card {
+            background: var(--white);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex; align-items: flex-start; gap: 20px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer; position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .notion-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 30px rgba(0, 191, 166, 0.15);
+        }
+
+        .card-icon {
+            font-size: 1.8rem; min-width: 55px; height: 55px;
+            background: #f3f4f6; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .notion-card:hover .card-icon {
+            background-color: #ccfbf1; color: var(--accent-blue); transform: scale(1.1);
+        }
+
+        .card-content { flex: 1; }
+        .card-title { 
+            font-size: 1.25rem; font-weight: 700; color: var(--text-dark); 
+            margin-bottom: 6px; transition: color 0.3s ease;
+        }
+        .notion-card:hover .card-title { color: var(--accent-blue); }
+        .card-subtitle { font-size: 0.95rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.6; }
+
+        .meta-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.75rem; font-weight: 600; padding: 5px 12px;
+            border-radius: 20px; background-color: #f3f4f6; color: #4b5563;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .tag-notion { background-color: #fce7f3; color: #be185d; } 
+        .tag-locus { background-color: #dcfce7; color: #16a34a; }
+        
+        .card-disabled { opacity: 0.75; cursor: not-allowed; border-style: dashed; }
+        .card-disabled:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
+        .card-disabled:hover .card-title { color: var(--text-dark); }
+        .card-disabled:hover .card-icon { background: #f3f4f6; color: inherit; transform: none;}
+
+        .main-footer {
+            background-color: transparent; color: var(--text-dark);
+            text-align: center; padding: 30px 0;
+            border-top: 1px solid #e5e7eb; margin-top: 50px;
+        }
+
+        /* =========================================
+           5. MOBILE MEDIA QUERIES (Fix for iPhone 16)
+           ========================================= */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+
+            .nav-links {
+                position: fixed;
+                top: 70px; left: 0; width: 100%;
+                background-color: #111827;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                margin-right: 0;
+            }
+            .nav-links.active { max-height: 450px; padding-bottom: 20px; }
+            
+            .nav-links a {
+                width: 100%; justify-content: center;
+                padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            .dropdown-content {
+                position: static; width: 100%;
+                background-color: #0b0f19; border: none;
+            }
+            .dropdown-content a { text-align: center; } 
+
+            /* --- CENTER TEXT FIX FOR MOBILE --- */
+            
+            /* 1. Push text down to the middle of the screen */
+            .spacer-top { 
+                height: 35vh; /* Increased height so text sits in the center */
+            }
+
+            /* 2. Ensure Title is Center Aligned & Sized Correctly */
+            .sticky-title {
+                text-align: center !important; 
+                padding: 15px; 
+            }
+
+            .page-title { 
+                font-size: 2rem; /* Readable on phone */
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            /* Stack cards nicely */
+            .notion-card { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html#dashboard" class="logo">kk.</a>
+
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#dashboard"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="projects.html"><i class="fas fa-laptop-code"></i> Projects</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="dropbtn active-page" onclick="toggleDropdown(event)">
+                        <i class="fas fa-newspaper"></i> Blogs <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="academic_blogs.html" style="color: var(--accent-blue); font-weight: 600;">Academic & Technical Blogs</a>
+                        <a href="general_blogs.html">General Blogs</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="spacer-top"></div>
+
+    <div class="sticky-title">
+        <div data-aos="fade-down">
+            <h1 class="page-title">Academic & Technical Blogs</h1>
+            <p class="page-subtitle">A collection of my academic journey, exhibition projects, and technical insights.</p>
+        </div>
+    </div>
+
+    <div class="spacer-bottom"></div>
+
+    <div class="container-narrow">
+        
+        <a href="https://www.notion.so/Project-Gluco-Guard-Demonstration-of-Artificial-Pancreas-Using-Arduino-and-Electrical-Modeling-2d8581f0924a80a5bf98f4733dd3f6a5?source=copy_link" target="_blank" class="notion-card" data-aos="fade-up">
+            <div class="card-icon">
+                <i class="fas fa-microchip" style="color: #ea580c;"></i>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">First Year BE Project</h3>
+                <p class="card-subtitle">
+                    Electrical demonstrations of the working of artifical pancreas.
+                </p>
+                <div class="meta-tags">
+                    <span class="tag tag-notion"><i class="fas fa-pen-nib"></i> Written in Notion</span>
+                    <span class="tag tag-locus"><i class="fas fa-location-dot"></i> Locus 2023</span>
+                    <span class="tag"><i class="fas fa-users"></i> Group Project</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="notion-card card-disabled" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-icon">
+                <i class="fas fa-child-reaching" style="color: #64748b;"></i>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Children in Technology (CiT)</h3>
+                <p class="card-subtitle">
+                    A digital awareness initiative by the Locus 2026 with Worldlink Communications Pvt. Ltd.. We traveled to West Nepal to bridge the technological gap for students in rural areas.
+                </p>
+                <div class="meta-tags">
+                    <span class="tag"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="tag"><i class="fas fa-map-marker-alt"></i> West Nepal</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="notion-card card-disabled" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-icon">
+                <i class="fas fa-bolt" style="color: #64748b;"></i>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">FSU Experiences & Locus Exhibition</h3>
+                <p class="card-subtitle">
+                    Behind the scenes of organizing the events.
+                </p>
+                <div class="meta-tags">
+                    <span class="tag"><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span class="tag"><i class="fas fa-users"></i> Committee Member</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 Kushal Khadka. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 50
+        });
+
+        /* --- MOBILE MENU & DROPDOWN SCRIPT --- */
+        function toggleMobileMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn *')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+            if (!event.target.closest('.navbar')) {
+                var nav = document.getElementById("navLinks");
+                if(nav) nav.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Education | Kushal Khadka</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. GLOBAL VARIABLES & RESET
+           ========================================= */
+        :root {
+            --accent-blue: #00d2d3; /* Your Cyan Color */
+            --nav-bg: #1a1a2e;
+            --text-dark: #333;
+            --bg-grey: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-grey); color: var(--text-dark); overflow-x: hidden; }
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================
+           2. NAVBAR (Universal: Desktop & Mobile)
+           ========================================= */
+        .navbar {
+            background-color: var(--nav-bg);
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            width: 90%; /* Standard width */
+            margin: 0 auto;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        /* LOGO: KK. (No underline, always white) */
+        .logo { 
+            color: white !important; 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        /* LINKS CONTAINER */
+        .nav-links { 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #ccc;
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none;
+        }
+
+        /* Pop Up Effect */
+        .nav-links a:hover, .nav-links a.active-nav { 
+            color: var(--accent-blue); 
+            transform: translateY(-3px);
+        }
+
+        /* HAMBURGER ICON (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- DROPDOWN --- */
+        .nav-item.dropdown { position: relative; display: inline-block; }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #000000;
+            min-width: 260px;
+            top: 50px; 
+            
+            /* Center alignment logic */
+            left: 50%; transform: translateX(-50%);
+            
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 2001;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 15px 0;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            font-size: 0.9rem;
+            
+            /* CENTER TEXT inside dropdown */
+            text-align: center; 
+            
+            border-bottom: 1px solid #222;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: var(--accent-blue);
+        }
+
+        .show { display: block !important; }
+
+        /* =========================================
+           3. CINEMATIC SCROLL
+           ========================================= */
+        .spacer-top { height: 40vh; width: 100%; }
+
+        .sticky-title {
+            position: sticky;
+            top: 80px; 
+            z-index: 900;
+            text-align: center;
+            background-color: var(--bg-grey);
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .page-title { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: #000; 
+            margin-bottom: 5px; 
+        }
+        .page-subtitle { 
+            color: #333; 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+        }
+
+        .spacer-bottom { height: 60vh; }
+
+        /* =========================================
+           4. CONTENT GRID
+           ========================================= */
+        .container { max-width: 1100px; margin: 0 auto 50px; padding: 0 20px; }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* --- CARD DESIGN --- */
+        .edu-card {
+            background: white; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; flex-direction: column;
+            border: 1px solid #eee;
+        }
+        .edu-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+
+        .img-link { 
+            display: block; height: 220px; background-color: #fff; 
+            border-bottom: 1px solid #f0f0f0; position: relative; overflow: hidden;
+        }
+        .img-link img { 
+            width: 100%; height: 100%; object-fit: contain; padding: 35px;
+        }
+
+        .hover-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); 
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transition: 0.3s; color: white; font-weight: 600;
+        }
+        .hover-overlay span { border: 2px solid var(--accent-blue); padding: 8px 20px; border-radius: 30px; color: var(--accent-blue); }
+        .img-link:hover .hover-overlay { opacity: 1; }
+
+        .edu-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .school-name { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 5px; }
+        .location { font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 10px; }
+        .degree { font-weight: 600; color: #334155; font-size: 1rem; margin-bottom: 5px; }
+        
+        .status {
+            display: inline-block; padding: 6px 12px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 600; margin-top: auto; align-self: flex-start;
+        }
+        .status.completed { background-color: #dcfce7; color: #166534; }
+        .status.pursuing { background-color: #dbeafe; color: #1e40af; }
+        .highlight { border-bottom: 4px solid var(--accent-blue); }
+
+        .main-footer { text-align: center; padding: 30px 0; border-top: 1px solid #ddd; margin-top: 80px; background: #fff; }
+        .copyright { color: #777; font-size: 0.9rem; }
+
+        /* =========================================
+           5. MOBILE MEDIA QUERIES (Optimization)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Navbar */
+            .hamburger { display: block; }
+
+            .nav-links {
+                position: fixed;
+                top: 80px; left: 0; width: 100%;
+                background-color: var(--nav-bg);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                /* Override display:none from original flex logic if needed */
+                display: flex; 
+            }
+            .nav-links.active { max-height: 450px; padding-bottom: 20px; }
+            
+            .nav-links a {
+                width: 100%; justify-content: center;
+                padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            /* Dropdown Mobile Fix */
+            .dropdown-content {
+                position: static; width: 100%; transform: none; left: auto;
+                background-color: #0b0f19; border: none;
+            }
+
+            /* Center Text Logic */
+            .spacer-top { 
+                height: 35vh; /* This pushes the title to the center of the phone screen */
+            }
+            .page-title { font-size: 2rem; }
+            .sticky-title { padding: 15px; }
+            
+            /* Stack Grid */
+            .edu-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html#dashboard" class="logo">KK.</a>
+
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#dashboard"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="education.html" class="active-nav"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="projects.html"><i class="fas fa-laptop-code"></i> Projects</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown(event)">
+                        <i class="fas fa-newspaper"></i> Blogs <i class="fas fa-caret-down"></i>
+                    </a>
+                    
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="academic_blogs.html">Academic & Technical Blogs</a>
+                        <a href="general_blogs.html">General Blogs</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="spacer-top"></div>
+
+    <div class="sticky-title">
+        <h1 class="page-title">My Academic Journey</h1>
+        <p class="page-subtitle">From Schooling to Engineering Excellence</p>
+    </div>
+
+    <div class="spacer-bottom"></div>
+
+    <div class="container">
+        <div class="edu-grid">
+            
+            <div class="edu-card">
+                <a href="https://www.facebook.com/people/Spes-Simara/61553043224590/" target="_blank" class="img-link">
+                    <img src="assets/education/spes.png" alt="Simara Public School" onerror="this.src='https://via.placeholder.com/300x200?text=SPES+Logo'">
+                    <div class="hover-overlay"><span>Visit Site</span></div>
+                </a>
+                <div class="edu-info">
+                    <h3 class="school-name">Simara Public English School</h3>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> Simara, Bara</span>
+                    <p class="degree">Secondary Education Examination (SEE)</p>
+                    <span class="status completed">Completed</span>
+                </div>
+            </div>
+
+            <div class="edu-card">
+                <a href="https://www.soshgssanothimi.edu.np/" target="_blank" class="img-link">
+                    <img src="assets/education/sos.png" alt="SOS Hermann Gmeiner" onerror="this.src='https://via.placeholder.com/300x200?text=SOS+Logo'">
+                    <div class="hover-overlay"><span>Visit Site</span></div>
+                </a>
+                <div class="edu-info">
+                    <h3 class="school-name">SOS Hermann Gmeiner School</h3>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> Sanothimi, Bhaktapur</span>
+                    <p class="degree">Intermediate in Science (+2)</p>
+                    <span class="status completed">Completed</span>
+                </div>
+            </div>
+
+            <div class="edu-card highlight">
+                <a href="https://pcampus.edu.np/" target="_blank" class="img-link">
+                    <img src="assets/education/pulchowk.png" alt="Pulchowk Campus" onerror="this.src='https://via.placeholder.com/300x200?text=IOE+Logo'">
+                    <div class="hover-overlay"><span>Visit Site</span></div>
+                </a>
+                <div class="edu-info">
+                    <h3 class="school-name">Pulchowk Campus (IOE)</h3>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> Lalitpur, Nepal</span>
+                    <p class="degree">Bachelor in Electrical Engineering</p>
+                    <span class="status pursuing">Pursuing</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2026 Kushal Khadka. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+        // 2. Dropdown Logic
+        function toggleDropdown(event) {
+            if(event) event.stopPropagation();
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // 3. Close Logic
+        window.onclick = function(event) {
+            // Close Dropdown
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn *')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) openDropdown.classList.remove('show');
+                }
+            }
+            // Close Mobile Menu
+            if (!event.target.closest('.navbar')) {
+                var nav = document.getElementById("navLinks");
+                if (nav) nav.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>

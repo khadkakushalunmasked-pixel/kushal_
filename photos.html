@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Memories | Kushal Khadka</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. GLOBAL VARIABLES & RESET
+           ========================================= */
+        :root {
+            --accent-blue: #00d2d3;
+            --nav-bg: #1a1a2e;
+            --text-dark: #334155;
+            --bg-grey: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-grey); color: var(--text-dark); overflow-x: hidden; }
+
+        /* =========================================
+           2. NAVBAR (Universal: Desktop & Mobile)
+           ========================================= */
+        .navbar {
+            background-color: var(--nav-bg);
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            width: 90%;
+            margin: 0 auto;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        /* LOGO */
+        .logo { 
+            color: white !important; 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        /* LINKS */
+        .nav-links { 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #ccc;
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover, .nav-links a.active-nav { 
+            color: var(--accent-blue); 
+            transform: translateY(-3px); 
+        }
+
+        /* HAMBURGER (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* DROPDOWN */
+        .nav-item.dropdown { position: relative; display: inline-block; }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #000000;
+            min-width: 260px;
+            top: 50px; 
+            left: 50%; transform: translateX(-50%);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 2001;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 15px 0;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            font-size: 0.9rem;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: var(--accent-blue);
+        }
+
+        .show { display: block !important; }
+
+        /* =========================================
+           3. CINEMATIC SCROLL & TITLES
+           ========================================= */
+        .spacer-top { height: 40vh; width: 100%; }
+
+        .sticky-title {
+            position: sticky;
+            top: 80px; 
+            z-index: 900;
+            text-align: center;
+            background-color: var(--bg-grey);
+            padding: 20px 0;
+            width: 100%;
+        }
+        
+        .page-title { font-size: 2.5rem; color: #000; font-weight: 800; margin-bottom: 5px; }
+        .page-subtitle { color: #333; font-weight: 600; font-size: 1.1rem; }
+
+        .spacer-bottom { height: 50vh; }
+
+        /* =========================================
+           4. PHOTO GRID
+           ========================================= */
+        .container {
+            max-width: 1100px; margin: 0 auto 50px; padding: 0 20px; position: relative; z-index: 1;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .photo-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            height: 350px; /* Uniform Height */
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Zoom effect on hover */
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .caption-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.3s;
+        }
+
+        .photo-card:hover .caption-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .caption-text { font-weight: 600; font-size: 1.1rem; }
+
+        .main-footer { text-align: center; padding: 30px 0; border-top: 1px solid #e2e8f0; margin-top: 80px; background: #fff; }
+        .copyright { color: #777; font-size: 0.9rem; }
+
+        /* =========================================
+           5. MOBILE OPTIMIZATION
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Navbar */
+            .hamburger { display: block; }
+
+            .nav-links {
+                position: fixed; top: 80px; left: 0; width: 100%;
+                background-color: var(--nav-bg);
+                flex-direction: column; align-items: center; gap: 0;
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                display: flex;
+            }
+            .nav-links.active { max-height: 450px; padding-bottom: 20px; }
+            .nav-links a { width: 100%; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+            /* Dropdown */
+            .dropdown-content { position: static; width: 100%; transform: none; left: auto; background-color: #0b0f19; border: none; }
+            .dropdown-content a { text-align: center; }
+
+            /* Center Title */
+            .spacer-top { height: 35vh; }
+            .page-title { font-size: 2rem; }
+            .sticky-title { padding: 15px; }
+
+            /* Grid */
+            .photo-grid { grid-template-columns: 1fr; }
+            .photo-card { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html#dashboard" class="logo">KK.</a>
+
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#dashboard"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="projects.html"><i class="fas fa-laptop-code"></i> Projects</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown(event)">
+                        <i class="fas fa-newspaper"></i> Blogs <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="academic_blogs.html">Academic & Technical Blogs</a>
+                        <a href="general_blogs.html">General Blogs</a>
+                    </div>
+                </li>
+
+                <li><a href="photos.html" class="active-nav"><i class="fas fa-camera"></i> Photos</a></li>
+                
+                </ul>
+        </div>
+    </nav>
+
+    <div class="spacer-top"></div>
+
+    <div class="sticky-title">
+        <div data-aos="fade-down">
+            <h1 class="page-title">Memories</h1>
+            <p class="page-subtitle">Moments frozen in time, capturing the journey.</p>
+        </div>
+    </div>
+
+    <div class="spacer-bottom"></div>
+
+    <div class="container">
+        <div class="photo-grid">
+            
+            <div class="photo-card" data-aos="fade-up">
+                <img src="assets/photos/photo1.jpg" alt="Memory 1" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+1'">
+                <div class="caption-overlay">
+                    <span class="caption-text">College Events</span>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/photos/photo2.jpg" alt="Memory 2" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+2'">
+                <div class="caption-overlay">
+                    <span class="caption-text">Project Demonstration</span>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/photos/photo3.jpg" alt="Memory 3" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+3'">
+                <div class="caption-overlay">
+                    <span class="caption-text">Locus Exhibition</span>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="assets/photos/photo4.jpg" alt="Memory 4" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+4'">
+                <div class="caption-overlay">
+                    <span class="caption-text">Field Trip</span>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up">
+                <img src="assets/photos/photo5.jpg" alt="Memory 5" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+5'">
+                <div class="caption-overlay">
+                    <span class="caption-text">Awards & Recognition</span>
+                </div>
+            </div>
+
+             <div class="photo-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/photos/photo6.jpg" alt="Memory 6" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+6'">
+                <div class="caption-overlay">
+                    <span class="caption-text">Friends & Team</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2026 Kushal Khadka. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 50
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+        // Dropdown
+        function toggleDropdown(event) {
+            if(event) event.stopPropagation();
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close on Click Outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn *')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) dropdowns[i].classList.remove('show');
+                }
+            }
+            if (!event.target.closest('.navbar')) {
+                var nav = document.getElementById("navLinks");
+                if (nav) nav.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
