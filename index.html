@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kushal Khadka</title>
-         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='75' font-family='Arial, sans-serif' font-size='60' font-weight='900' fill='%23003399' text-anchor='middle'>KK.</text></svg>">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='75' font-family='Arial, sans-serif' font-size='60' font-weight='900' fill='%23003399' text-anchor='middle'>KK.</text></svg>">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
@@ -71,8 +74,8 @@
         .nav-links a:hover, .dropbtn:hover { color: #00d2d3; transform: translateY(-2px); }
 
         /* HAMBURGER */
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
+        .hamburger { display: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 2005; }
+        
         /* DROPDOWN */
         .nav-item { position: relative; }
         .dropdown-content { 
@@ -146,6 +149,10 @@
             font-size: 1.1rem; transition: 0.3s; 
         }
         .social-icons a:hover { background-color: #00d2d3; transform: translateY(-3px); }
+        
+        /* 2. FORCE ICONS WHITE (Added this just in case) */
+        .social-icons i { color: white !important; }
+        
         .copyright { font-size: 0.9rem; color: #555; }
 
         /* =========================================
@@ -153,7 +160,7 @@
            ========================================= */
         @media (max-width: 768px) {
             /* Navbar */
-            .hamburger { display: block; }
+            .hamburger { display: block; margin-right: 15px; }
 
             .nav-links {
                 position: fixed; top: 80px; left: 0; width: 100%;
@@ -164,7 +171,7 @@
                 box-shadow: 0 5px 10px rgba(0,0,0,0.2);
                 display: flex; 
             }
-            .nav-links.active { max-height: 450px; padding-bottom: 20px; }
+            .nav-links.active { max-height: 500px; padding-bottom: 20px; }
             
             .nav-links a { width: 100%; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
@@ -216,7 +223,7 @@
                 <span class="section-tag">Who I Am</span>
                 <h2 class="main-heading" style="margin-bottom: 35px;">Concepts to practice.</h2>
                 <div class="story-text">
-                    <p>I am a <strong>final-year Electrical Engineering student</strong> at Pulchowk Campus (IoE), Tribhuvan University. Through my academic journey, I have developed a strong interest in clean energy and power systems, particularly in understanding how electrical energy systems are planned, analyzed, and continuously improved.</p>
+                    <p>I am a <strong>final-year Electrical Engineering student</strong> at Pulchowk Campus (IoE), Tribhuvan University. Through my academic journey, I have developed a strong interest in clean energy and sustainable power systems, driven to solve real-world energy challenges through engineering innovation.</p>
                 </div>
                 <a onclick="lockAndEnterDashboard()" class="btn-explore">
                     Explore My Journey <i class="fas fa-arrow-right"></i>
@@ -386,9 +393,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
