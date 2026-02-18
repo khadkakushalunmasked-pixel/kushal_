@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kushal Khadka</title>
+    <title>Kushal Khadka | Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='75' font-family='Arial, sans-serif' font-size='60' font-weight='900' fill='%23003399' text-anchor='middle'>KK.</text></svg>">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- GLOBAL FONTS & RESET --- */
+        /* =========================================
+           1. GLOBAL FONTS & RESET
+           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
         html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
         body { background-color: #f8fafc; overflow-x: hidden; color: #333; }
 
-        /* --- UTILITY --- */
         .visible { display: block !important; animation: fadeInPage 1s ease forwards; }
         @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
         /* =========================================
-           PART 1: INTRO CONTAINER
+           2. INTRO / HERO SECTION
            ========================================= */
         #intro-container { width: 100%; position: relative; z-index: 50; background: white; }
         .snap-section { height: 100vh; width: 100%; scroll-snap-align: start; position: relative; }
 
-        /* HERO */
         .hero-section { background-color: #0F172A; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .hero-title { font-size: 3.5rem; font-weight: 800; color: #ffffff; opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
         .hero-subtitle { font-size: 1.2rem; font-weight: 400; color: #94a3b8; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; opacity: 0; animation: fadeUp 1s ease forwards 1s; }
@@ -38,7 +36,6 @@
         .scroll-text { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #64748b; }
         .scroll-icon { font-size: 1.5rem; color: #00d2d3; animation: bounce 2s infinite; }
 
-        /* ABOUT */
         .about-section { background-color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 5%; text-align: center; }
         .section-tag { color: #00d2d3; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; display: block; }
         .main-heading { font-size: 3rem; font-weight: 700; color: #0F172A; margin-bottom: 30px; line-height: 1.2; }
@@ -52,11 +49,10 @@
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
         /* =========================================
-           PART 2: MAIN DASHBOARD
+           3. MAIN DASHBOARD & NAVBAR
            ========================================= */
         #main-dashboard { display: none; width: 100%; background-color: #fff; min-height: 100vh; position: relative; }
 
-        /* NAVBAR (Universal) */
         nav { 
             background-color: #1a1a2e; color: white; 
             display: flex; justify-content: space-between; align-items: center; 
@@ -72,10 +68,8 @@
         }
         .nav-links a:hover, .dropbtn:hover { color: #00d2d3; transform: translateY(-2px); }
 
-        /* HAMBURGER */
         .hamburger { display: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 2005; }
         
-        /* DROPDOWN */
         .nav-item { position: relative; }
         .dropdown-content { 
             display: none; position: absolute; background-color: #000; min-width: 260px; 
@@ -88,44 +82,33 @@
         .dropdown-content a:hover { background-color: #222; color: #00d2d3; }
         .show { display: block !important; }
 
-        /* --- COVER PHOTO (Desktop Default) --- */
+        /* =========================================
+           4. PROFILE SECTION & TYPING
+           ========================================= */
         .cover-photo-container {
             margin-top: 80px; width: 100%; height: 50vh; min-height: 400px;
             position: relative; overflow: hidden; background-color: #111; 
         }
         .cover-photo-container img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center; opacity: 0; 
+            object-fit: cover; object-position: center; opacity: 0; 
             transition: opacity 1.5s ease-in-out; z-index: 1;
         }
         .cover-photo-container img.active { opacity: 1; z-index: 2; }
 
-        /* --- PROFILE SECTION --- */
         .container { 
             display: flex; justify-content: center; align-items: center; 
             min-height: 90vh; padding: 50px 5%; flex-wrap: wrap; gap: 30px; 
         }
 
-        .text-section { 
-            flex: 1; min-width: 350px; display: flex; flex-direction: column; 
-            justify-content: center; align-items: flex-start; 
-        }
-        
+        .text-section { flex: 1; min-width: 350px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
         .im-text { font-size: 1.6rem; font-weight: 600; color: #00d2d3; margin-bottom: 5px; }
         
-        /* TYPING EFFECT */
-        .name-wrapper { display: inline-block; margin-bottom: 30px; padding-right: 5px; }
-        .name-text { 
-            font-size: 4rem; font-weight: 800; color: #000; line-height: 1.1; 
-            white-space: nowrap; overflow: hidden; width: 0; 
-            border-right: 10px solid #000; 
-            animation: typing 2.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #000; } }
+        .name-wrapper { display: inline-block; margin-bottom: 30px; padding-right: 5px; min-height: 4.5rem; }
+        .typing-text { font-size: 4rem; font-weight: 800; color: #000; line-height: 1.1; }
+        .cursor { display: inline-block; width: 5px; height: 3.5rem; background-color: #00d2d3; margin-left: 5px; animation: blink-caret 0.75s infinite; vertical-align: sub; }
+        @keyframes blink-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* SCROLL REVEAL SECTION */
         .scroll-content { display: flex; flex-direction: column; gap: 15px; }
         .role { font-size: 1.6rem; font-weight: 600; color: #2c3e50; }
         .description { color: #555; line-height: 1.7; max-width: 600px; font-size: 1.2rem; }
@@ -138,7 +121,9 @@
         }
         .image-card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* FOOTER */
+        /* =========================================
+           5. FOOTER
+           ========================================= */
         .footer-section { text-align: center; padding: 40px 0; background: #fff; border-top: 1px solid #eee; }
         .social-icons { margin-bottom: 20px; display: flex; justify-content: center; gap: 15px; }
         .social-icons a { 
@@ -151,181 +136,80 @@
         .copyright { font-size: 0.9rem; color: #555; }
         
         /* =========================================
-           FLOATING CHAT WIDGET
+           6. FLOATING CHAT WIDGET
            ========================================= */
-        .chat-widget-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-        }
-
+        .chat-widget-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
         .chat-widget-btn {
-            width: 60px;
-            height: 60px;
-            background-color: #0F172A; 
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 60px; height: 60px; background-color: #0F172A; color: #fff;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
-        
-        .chat-widget-btn:hover {
-            transform: scale(1.1);
-            background-color: #00d2d3;
-            color: #0F172A;
-        }
+        .chat-widget-btn:hover { transform: scale(1.1); background-color: #00d2d3; color: #0F172A; }
 
         .chat-widget-window {
-            display: none; 
-            position: absolute;
-            bottom: 80px; 
-            right: 0;
-            width: 350px;
-            background-color: #D5D5E3; 
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-            font-family: 'Poppins', sans-serif;
+            display: none; position: absolute; bottom: 80px; right: 0; width: 350px;
+            background-color: #D5D5E3; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden; flex-direction: column; font-family: 'Poppins', sans-serif;
         }
-
         .chat-header {
-            background-color: #D5D5E3;
-            color: #333;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            border-bottom: 1px solid #c0c0d0;
+            background-color: #D5D5E3; color: #333; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #c0c0d0;
         }
-
-        .chat-controls i {
-            margin-left: 15px;
-            cursor: pointer;
-            transition: color 0.2s;
-            font-size: 1rem;
-            color: #555;
-        }
-
+        .chat-controls i { margin-left: 15px; cursor: pointer; transition: color 0.2s; font-size: 1rem; color: #555; }
         .chat-controls i:hover { color: #000; }
 
-        .chat-body {
-            padding: 20px;
-            background: #D5D5E3;
-        }
-
-        .chat-body .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .chat-body .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-
-        .chat-body label {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .chat-body label span {
-            color: red;
-        }
-
+        .chat-body { padding: 20px; background: #D5D5E3; }
+        .chat-body .form-row { display: flex; gap: 15px; margin-bottom: 20px; }
+        .chat-body .form-group { flex: 1; display: flex; flex-direction: column; margin-bottom: 20px; }
+        .chat-body label { font-size: 0.9rem; color: #555; margin-bottom: 5px; font-weight: 500; }
+        .chat-body label span { color: red; }
         .chat-body input, .chat-body textarea {
-            width: 100%;
-            padding: 8px 0;
-            border: none;
-            border-bottom: 2px solid #a0a0b0;
-            background: transparent;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.3s;
-            border-radius: 0;
+            width: 100%; padding: 8px 0; border: none; border-bottom: 2px solid #a0a0b0;
+            background: transparent; font-size: 1rem; font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s; border-radius: 0;
         }
-
-        .chat-body input:focus, .chat-body textarea:focus {
-            outline: none;
-            border-bottom-color: #555;
-        }
+        .chat-body input:focus, .chat-body textarea:focus { outline: none; border-bottom-color: #555; }
 
         .chat-submit-btn {
-            padding: 12px 30px;
-            background-color: #5A6680; 
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
+            padding: 12px 30px; background-color: #5A6680; color: white; border: none;
+            border-radius: 25px; font-weight: 600; font-size: 1rem; cursor: pointer;
+            transition: 0.3s; margin-top: 10px;
         }
-
-        .chat-submit-btn:hover {
-            background-color: #44506a;
-        }
-
-        .show-chat {
-            display: flex !important;
-            animation: popUp 0.3s ease-out forwards;
-        }
-
-        @keyframes popUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .chat-submit-btn:hover { background-color: #44506a; }
+        
+        .show-chat { display: flex !important; animation: popUp 0.3s ease-out forwards; }
+        @keyframes popUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* =========================================
-           MOBILE OPTIMIZATION
+           7. MOBILE OPTIMIZATION
            ========================================= */
         @media (max-width: 768px) {
             .hamburger { display: block; margin-right: 15px; }
-
             .nav-links {
-                position: fixed; top: 80px; left: 0; width: 100%;
-                background-color: #1a1a2e;
-                flex-direction: column; align-items: center; gap: 0;
-                max-height: 0; overflow: hidden;
-                transition: max-height 0.4s ease-in-out;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                display: flex; 
+                position: fixed; top: 80px; left: 0; width: 100%; background-color: #1a1a2e;
+                flex-direction: column; align-items: center; gap: 0; max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-in-out; box-shadow: 0 5px 10px rgba(0,0,0,0.2); display: flex; 
             }
             .nav-links.active { max-height: 500px; padding-bottom: 20px; }
-            
             .nav-links a { width: 100%; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
             .dropdown-content { position: static; width: 100%; transform: none; left: auto; background-color: #0b0f19; border: none; }
-            .dropdown-content a { text-align: center; }
-
+            
             .hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1rem; }
-            
-            .cover-photo-container { 
-                margin-top: 80px; width: 100%; height: auto; aspect-ratio: 16/9; background-color: #000;
-            }
+            .cover-photo-container { margin-top: 80px; width: 100%; height: auto; aspect-ratio: 16/9; background-color: #000; }
             .cover-photo-container img { object-fit: contain; object-position: center; }
-
+            
             .container { flex-direction: column-reverse; text-align: center; padding-top: 50px;} 
             .text-section { align-items: center; width: 100%; min-width: auto; } 
-            .name-text { font-size: 2.2rem; border-right: 6px solid #000; }
+            
+            /* Typing text mobile adjustments */
+            .typing-text { font-size: 2.2rem; }
+            .cursor { height: 2rem; }
+            .name-wrapper { min-height: 2.5rem; }
             
             .image-card { width: 90%; height: auto; aspect-ratio: 1/1.2; }
-            .description { font-size: 1rem; }
             
             .chat-widget-window { width: 300px; right: -10px; }
             .chat-body .form-row { flex-direction: column; gap: 0; }
@@ -359,23 +243,15 @@
     </div>
 
     <div id="main-dashboard">
+        
         <nav id="navbar">
             <div class="logo">KK.</div>
-            
-            <div class="hamburger" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-
+            <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
             <ul class="nav-links" id="navLinks">
-                <li>
-                    <a onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="cursor: pointer;">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                </li>
+                <li><a onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="cursor: pointer;"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
                 <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
                 <li><a href="projects.html"><i class="fas fa-laptop-code"></i> Projects</a></li>
-                
                 <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">
                         <i class="fas fa-newspaper"></i> Blogs <i class="fas fa-caret-down"></i>
@@ -385,7 +261,6 @@
                         <a href="general_blogs.html" onclick="toggleDropdown()">General Blogs</a>
                     </div>
                 </li>
-
                 <li><a href="photos.html"><i class="fas fa-camera"></i> Photos</a></li>
                 <li><a onclick="toggleChatWindow()" style="cursor:pointer;"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
@@ -401,14 +276,13 @@
                 <div class="im-text">I'm</div>
 
                 <div class="name-wrapper">
-                    <div class="name-text">Kushal Khadka</div>
+                    <span class="typing-text"></span><span class="cursor"></span>
                 </div>
 
                 <div class="scroll-content">
                     <div data-aos="fade-up" data-aos-offset="100" data-aos-delay="1000" data-aos-duration="1000">
                         <h4 class="role">Electrical Engineering Student</h4>
                     </div>
-                    
                     <div data-aos="fade-up" data-aos-delay="1200" data-aos-offset="80" data-aos-duration="1000">
                         <p class="description">
                             Electrical Engineering final-year student passionate about clean energy and sustainable power systems, driven to solve real-world energy challenges through engineering innovation.
@@ -426,21 +300,11 @@
 
         <div id="contact-section" class="footer-section">
              <div class="social-icons">
-                <a href="https://github.com/khadkakushalunmasked-pixel" target="_blank">
-                      <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/kushalkhadka/" target="_blank">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.facebook.com/iamkushalkhadka/" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/iam_kushalkhadka" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="mailto:078bel050.kushal@pcampus.edu.np">
-                    <i class="fas fa-envelope"></i>
-                </a>
+                <a href="https://github.com/khadkakushalunmasked-pixel" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/kushalkhadka/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/iamkushalkhadka/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/iam_kushalkhadka" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:078bel050.kushal@pcampus.edu.np"><i class="fas fa-envelope"></i></a>
             </div>
             <div class="copyright">&copy; 2026 Kushal Khadka. All Rights Reserved.</div>
         </div>
@@ -493,7 +357,7 @@
         </div>
         </div> <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Navigation Logic (The "Unlock" Function)
+        // 1. Dashboard Unlock
         function lockAndEnterDashboard() {
             document.getElementById('intro-container').style.display = 'none'; 
             document.documentElement.style.scrollSnapType = 'none';
@@ -503,24 +367,42 @@
             dashboard.classList.add('visible');
             
             window.scrollTo(0, 0);
-            
-            AOS.init({ 
-                once: true,
-                offset: 50 
-            });
+            AOS.init({ once: true, offset: 50 });
         }
 
-        // 2. Mobile Menu Logic
+        // 2. Typing Effect (English & Nepali)
+        document.addEventListener('DOMContentLoaded', () => {
+            const textElement = document.querySelector(".typing-text");
+            if (textElement) {
+                const texts = ["Kushal Khadka", "कुशल खड्का"]; 
+                let count = 0; let index = 0; let isDeleting = false; let currentText = ""; let letter = "";
+
+                (function type() {
+                    if (count === texts.length) count = 0;
+                    currentText = texts[count];
+
+                    letter = isDeleting ? currentText.slice(0, --index) : currentText.slice(0, ++index);
+                    textElement.textContent = letter;
+
+                    let typeSpeed = isDeleting ? 80 : 150;
+                    if (!isDeleting && letter.length === currentText.length) {
+                        typeSpeed = 2000; isDeleting = true;
+                    } else if (isDeleting && letter.length === 0) {
+                        isDeleting = false; count++; typeSpeed = 500;
+                    }
+                    setTimeout(type, typeSpeed);
+                })();
+            }
+        });
+
+        // 3. Mobile Menu & Dropdown Logic
         function toggleMobileMenu() {
             document.getElementById("navLinks").classList.toggle("active");
         }
-
-        // 3. Dropdown Logic
         function toggleDropdown() { 
             document.getElementById("myDropdown").classList.toggle("show"); 
         }
         
-        // Close dropdown / menu if clicked outside
         window.onclick = function(e) { 
             if (!e.target.matches('.dropbtn') && !e.target.matches('.dropbtn *')) { 
                 var d = document.getElementsByClassName("dropdown-content"); 
@@ -536,16 +418,16 @@
 
         // 4. Slideshow Logic
         const coverImages = document.querySelectorAll('.cover-photo-container img');
-        let index = 0;
+        let slideIndex = 0;
         setInterval(() => {
             if (coverImages.length > 1) {
-                coverImages[index].classList.remove('active');
-                index = (index + 1) % coverImages.length;
-                coverImages[index].classList.add('active');
+                coverImages[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % coverImages.length;
+                coverImages[slideIndex].classList.add('active');
             }
         }, 5000); 
 
-        // 5. Check for #dashboard link
+        // 5. Dashboard Load via Hash
         window.addEventListener('load', function() {
             if(window.location.hash === "#dashboard") {
                 lockAndEnterDashboard();
@@ -555,7 +437,7 @@
         // 6. Floating Chat Widget Logic
         function toggleChatWindow() {
             const chatWindow = document.getElementById('chatWidgetWindow');
-            chatWindow.classList.toggle('show-chat');
+            if (chatWindow) chatWindow.classList.toggle('show-chat');
         }
     </script>
 </body>
