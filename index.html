@@ -154,154 +154,7 @@
         .social-icons i { color: white !important; }
         
         .copyright { font-size: 0.9rem; color: #555; }
-        /* =========================================
-           FLOATING CHAT WIDGET
-           ========================================= */
-        .chat-widget-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-        }
-
-        /* The circular message button */
-        .chat-widget-btn {
-            width: 60px;
-            height: 60px;
-            background-color: #0F172A; 
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
         
-        .chat-widget-btn:hover {
-            transform: scale(1.1);
-            background-color: #00d2d3;
-            color: #0F172A;
-        }
-
-        /* The actual popup window */
-        .chat-widget-window {
-            display: none; /* Hidden initially */
-            position: absolute;
-            bottom: 80px; 
-            right: 0;
-            width: 350px;
-            background-color: #D5D5E3; /* Light purple/grey background */
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-            flex-direction: column;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .chat-header {
-            background-color: #D5D5E3;
-            color: #333;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            border-bottom: 1px solid #c0c0d0;
-        }
-
-        .chat-controls i {
-            margin-left: 15px;
-            cursor: pointer;
-            transition: color 0.2s;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .chat-controls i:hover { color: #000; }
-
-        .chat-body {
-            padding: 20px;
-            background: #D5D5E3;
-        }
-
-        .chat-body .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .chat-body .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-
-        .chat-body label {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .chat-body label span {
-            color: red;
-        }
-
-        .chat-body input, .chat-body textarea {
-            width: 100%;
-            padding: 8px 0;
-            border: none;
-            border-bottom: 2px solid #a0a0b0;
-            background: transparent;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.3s;
-            border-radius: 0;
-        }
-
-        .chat-body input:focus, .chat-body textarea:focus {
-            outline: none;
-            border-bottom-color: #555;
-        }
-
-        .chat-submit-btn {
-            padding: 12px 30px;
-            background-color: #5A6680; /* Darker blue-grey */
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .chat-submit-btn:hover {
-            background-color: #44506a;
-        }
-
-        /* Class to show the window with animation */
-        .show-chat {
-            display: flex !important;
-            animation: popUp 0.3s ease-out forwards;
-        }
-
-        @keyframes popUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .chat-widget-window { width: 300px; right: -10px; }
-            .chat-body .form-row { flex-direction: column; gap: 0; }
-        }
-
         /* =========================================
            MOBILE OPTIMIZATION
            ========================================= */
@@ -469,7 +322,154 @@
             <div class="copyright">&copy; 2026 Kushal Khadka. All Rights Reserved.</div>
         </div>
     </div>
-    
+    /* =========================================
+           FLOATING CHAT WIDGET
+           ========================================= */
+        .chat-widget-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        /* The circular message button */
+        .chat-widget-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #0F172A; 
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .chat-widget-btn:hover {
+            transform: scale(1.1);
+            background-color: #00d2d3;
+            color: #0F172A;
+        }
+
+        /* The actual popup window */
+        .chat-widget-window {
+            display: none; /* Hidden initially */
+            position: absolute;
+            bottom: 80px; 
+            right: 0;
+            width: 350px;
+            background-color: #D5D5E3; /* Light purple/grey background */
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chat-header {
+            background-color: #D5D5E3;
+            color: #333;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #c0c0d0;
+        }
+
+        .chat-controls i {
+            margin-left: 15px;
+            cursor: pointer;
+            transition: color 0.2s;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .chat-controls i:hover { color: #000; }
+
+        .chat-body {
+            padding: 20px;
+            background: #D5D5E3;
+        }
+
+        .chat-body .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .chat-body .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .chat-body label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .chat-body label span {
+            color: red;
+        }
+
+        .chat-body input, .chat-body textarea {
+            width: 100%;
+            padding: 8px 0;
+            border: none;
+            border-bottom: 2px solid #a0a0b0;
+            background: transparent;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+            border-radius: 0;
+        }
+
+        .chat-body input:focus, .chat-body textarea:focus {
+            outline: none;
+            border-bottom-color: #555;
+        }
+
+        .chat-submit-btn {
+            padding: 12px 30px;
+            background-color: #5A6680; /* Darker blue-grey */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .chat-submit-btn:hover {
+            background-color: #44506a;
+        }
+
+        /* Class to show the window with animation */
+        .show-chat {
+            display: flex !important;
+            animation: popUp 0.3s ease-out forwards;
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .chat-widget-window { width: 300px; right: -10px; }
+            .chat-body .form-row { flex-direction: column; gap: 0; }
+        }
+
                 
          
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -539,58 +539,12 @@
             }
         });
     </script>
-<div class="chat-widget-container">
-        
-        <div class="chat-widget-btn" onclick="toggleChatWindow()">
-            <i class="fas fa-comment-dots"></i>
-        </div>
 
-        <div class="chat-widget-window" id="chatWidgetWindow">
-            <div class="chat-header">
-                <span>Contact</span>
-                <div class="chat-controls">
-                    <i class="fas fa-minus" title="Minimize" onclick="toggleChatWindow()"></i>
-                    <i class="fas fa-times" title="Close" onclick="toggleChatWindow()"></i>
-                </div>
-            </div>
-            
-            <div class="chat-body">
-                <form action="https://formsubmit.co/078bel050.kushal@pcampus.edu.np" method="POST">
-                    
-                    <input type="hidden" name="_subject" value="New Message via Floating Chat!">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="First Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="Last Name" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email <span>*</span></label>
-                        <input type="email" id="email" name="Email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Write a message</label>
-                        <textarea id="message" name="Message" rows="3" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="chat-submit-btn">Submit</button>
-                </form>
-            </div>
-        </div>
-        
-    </div>
 </body>
 
 </html>
+
 
 
 
