@@ -43,4 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+// 6. Floating Chat Widget Logic
+        function toggleChatWindow() {
+            const chatWindow = document.getElementById('chatWidgetWindow');
+            chatWindow.classList.toggle('show-chat');
+        }
 });
