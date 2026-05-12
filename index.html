@@ -175,7 +175,7 @@
         .chat-submit-btn {
             padding: 12px 30px; background-color: #5A6680; color: white; border: none;
             border-radius: 25px; font-weight: 600; font-size: 1rem; cursor: pointer;
-            transition: 0.3s; margin-top: 10px;
+            transition: 0.3s; margin-top: 10px; width: 100%;
         }
         .chat-submit-btn:hover { background-color: #44506a; }
         
@@ -302,7 +302,7 @@
              <div class="social-icons">
                 <a href="https://github.com/khadkakushalunmasked-pixel" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/kushalkhadka/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.facebook.com/iamkushalkhadka/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61566270816731 target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/iam_kushalkhadka" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="mailto:078bel050.kushal@pcampus.edu.np"><i class="fas fa-envelope"></i></a>
             </div>
@@ -328,25 +328,20 @@
                         <input type="hidden" name="_subject" value="New Message via Floating Chat!">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://khadkakushalunmasked-pixel.github.io/index.html">
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="First Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="Last Name" required>
-                            </div>
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span>*</span></label>
+                            <input type="text" id="fullName" name="Full Name" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email <span>*</span></label>
-                            <input type="email" id="email" name="Email" required>
+                            <label for="contactDetails">Contact Details</label>
+                            <input type="text" id="contactDetails" name="Contact Details" placeholder="number or email">
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Write a message</label>
+                            <label for="message">Write a message <span>*</span></label>
                             <textarea id="message" name="Message" rows="3" required></textarea>
                         </div>
                         
@@ -355,7 +350,10 @@
                 </div>
             </div>
         </div>
-        </div> <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        
+    </div> 
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // 1. Dashboard Unlock
         function lockAndEnterDashboard() {
@@ -370,28 +368,23 @@
             AOS.init({ once: true, offset: 50 });
         }
 
-        // 2. Typing Effect (English & Nepali)
+        // 2. Typing Effect (Runs Only Once and Stops)
         document.addEventListener('DOMContentLoaded', () => {
             const textElement = document.querySelector(".typing-text");
             if (textElement) {
-                const texts = ["Kushal Khadka", "कुशल खड्का"]; 
-                let count = 0; let index = 0; let isDeleting = false; let currentText = ""; let letter = "";
+                const text = "Kushal Khadka"; 
+                let index = 0;
 
-                (function type() {
-                    if (count === texts.length) count = 0;
-                    currentText = texts[count];
-
-                    letter = isDeleting ? currentText.slice(0, --index) : currentText.slice(0, ++index);
-                    textElement.textContent = letter;
-
-                    let typeSpeed = isDeleting ? 80 : 150;
-                    if (!isDeleting && letter.length === currentText.length) {
-                        typeSpeed = 2000; isDeleting = true;
-                    } else if (isDeleting && letter.length === 0) {
-                        isDeleting = false; count++; typeSpeed = 500;
+                function type() {
+                    textElement.textContent = text.slice(0, index);
+                    index++;
+                    
+                    if (index <= text.length) {
+                        setTimeout(type, 150); // Typing speed
                     }
-                    setTimeout(type, typeSpeed);
-                })();
+                }
+                
+                type(); // Start the typing effect
             }
         });
 
